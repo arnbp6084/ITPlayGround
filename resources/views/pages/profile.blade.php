@@ -22,12 +22,12 @@
             <div class="col-full">
                 @php
                 if (file_exists( public_path() . "/upload/$userinfo->image") && !empty($userinfo->image))
-                     $prflepth="http://localhost:8000/upload/$userinfo->image";
+                     $prflepth="/upload/$userinfo->image";
                 else
-                    $prflepth="http://localhost:8000/images/profile.png";
+                    $prflepth="/images/profile.png";
                 @endphp
 
-                <img style="width:15%;box-shadow: 0px 0px 100px 10px grey;border-radius: 80px 80px 80px 80px;" src="{{ $prflepth }}" alt="Homepage">
+                <img style="width:15%;box-shadow: 0px 0px 100px 10px grey;border-radius: 80px 80px 80px 80px;" src="{{ asset($prflepth) }}" alt="Homepage">
                 <br><br>
                 <h3 class="subhead">My Profile</h3>
                 <div class="card">

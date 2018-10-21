@@ -2087,6 +2087,8 @@ body.menu-is-open {
     font-size: 2.2rem;
   }
 
+  .contactus { display: none; }
+
 }
 
 

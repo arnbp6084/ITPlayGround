@@ -127,6 +127,12 @@
         .display-1 { font-size: 1.8rem; color:white;}
 
         .subcourses a { box-shadow: 0px 0px 23px 0px grey; border-radius: 20px 20px 20px 20px; padding-left: 8%; width: auto; margin:2%;}
+        .contactus {background-color: #fff; color:#000; max-width: 25%; min-height: 50%; position: fixed;top: 49%; left: 74%; width: 40%; z-index: 10;}
+        .contactus input {color: black !important;box-shadow: 0px 0px 3px 0px grey;height: 2px;margin-top:10%;}
+        .contactus textarea {color: black !important;box-shadow: 0px 0px 3px 0px grey;min-height: 12rem;margin-bottom: 1rem;}
+        .incont img {width: 20px;}
+        .incont .contactus-min img {width: 26px;}
+        .contactus-min,.contactus-close { cursor: pointer; }
     </style>
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}"> -->
 

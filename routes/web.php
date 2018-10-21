@@ -21,6 +21,7 @@ Route::resource('courses', 'CoursesController');
 Route::resource('profile', 'ProfileController');
 Route::post('/myprofile/passwordchange', 'ProfileController@passwordchange')->name('formSubmit');
 Route::post('/enroll', 'CoursesController@enrollyou')->name('enrollYou');
+Route::post('/contactus', 'HomeController@contactus')->name('contactus');
 
 //admin
 Route::get('/manage',['uses' => 'admin\AdminController@index', 'as' => 'adminhomefirst']);
@@ -37,8 +38,14 @@ Route::resource('admincontent', 'admin\ContentController');
 Route::post('/admincontentsts', 'admin\ContentController@statuschange');
 Route::resource('adminuser', 'admin\UserController');
 Route::post('/adminusersts', 'admin\UserController@statuschange');
-
 Route::get('/adminenroll', 'admin\ProjectController@enroll');
+
+Route::resource('adminprofile', 'admin\ProfileController');
+Route::post('/adminprofile/passwordchange', 'admin\ProfileController@passwordchange')->name('adminProfileSubmit');
+
+Route::get('/admincontact', 'admin\AdminController@contactus');
+
+
 
 /*Route::get('/manage', function () {
     return view('admin.pages.home');

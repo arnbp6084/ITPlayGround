@@ -44,10 +44,13 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function show(Content $content)
+    public function show($id)
     {
-        $cont = \App\Content::find($content);
+        $cont = \App\Content::find($id);
         $contentinfobyid = $cont->ToArray();
+
+        /*print_r($contentinfobyid);
+        exit();*/
 
         $contentall = \App\Content::all();
         $contentallinfo = $contentall->toArray();

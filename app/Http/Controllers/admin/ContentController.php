@@ -89,6 +89,7 @@ class ContentController extends Controller
      */
     public function show($id)
     {
+        echo "kjhkjh";exit();
         $content = Content::find($id)->ToArray();
         return view('admin.pages.contentview',compact('content',$content));
     }

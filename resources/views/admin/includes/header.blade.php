@@ -92,24 +92,31 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @php
+                            
                             if(empty($user)){
-                                $user='';
-                            }
+                              if(!empty(Session::get('adminimage'))){
+                                $image=Session::get('adminimage');
+                              }else{
+                                $image='';
+                              }
+                                
+                            }else{
                                $userinfo=$user;
                                $prflepth='';
-                            if(empty($userinfo->image)){
-                                $image='';
-                            }else{
-                                $image=$userinfo->image;
+                                if(empty($userinfo->image)){
+                                    $image='';
+                                }else{
+                                    $image=$userinfo->image;
+                                }
                             }
                             @endphp
                             @php
                             if (file_exists( public_path() . "/upload/$image") && !empty($image))
-                                 $prflepth="http://localhost:8000/upload/$image";
+                                 $prflepth="/upload/$image";
                             else
-                                $prflepth="http://localhost:8000/images/profile.png";
+                                $prflepth="/images/profile.png";
                             @endphp
-                            <img class="user-avatar rounded-circle" src="{{ $prflepth }}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{ asset($prflepth) }}" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">

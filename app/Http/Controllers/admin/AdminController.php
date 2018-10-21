@@ -42,6 +42,7 @@ class AdminController extends Controller
             $request->session()->put('id', $userInfo['id']);
             $request->session()->put('name', $userInfo['name']);
             $request->session()->put('email', $userInfo['email']);
+            $request->session()->put('adminimage', $userInfo['image']);
             if($userInfo['id'] == 1){
                 return redirect('/adminhome');    
             }else{
@@ -210,5 +211,44 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function contactus()
+    {
+
+        $usercontact = \App\User::join('contactus', function($join) {
+          $join->on('users.id', '=', 'contactus.uid');
+        })->select('users.id as usrid')->get()->unique('usrid');
+        
+        $usercontactdata=$usercontact->ToArray();
+        
+        $userarrall=array();
+            
+        foreach ($usercontactdata as $key => $userdata) {
+            //echo $userdata['usrid'].'</br>';
+            $user = \App\User::find($userdata['usrid']);
+            $userarr=$user->ToArray();
+            
+            $usrcontarr=array();
+            
+            $userarrall[$key]=$userarr;
+            
+            $usercontactall=$user->contacts->ToArray();
+            
+            foreach ($usercontactall as $key1 => $value) {
+                
+                array_push($usrcontarr, $value['message']);
+            }
+
+            $userarrall[$key]['msgs']=$usrcontarr;
+            
+        }
+        /*print '<br>===========User Project details: <pre>';
+        print_r($userarrall);
+        print '</pre>===========<br>';
+
+        exit();*/
+
+        return view('admin.pages.contactmessage',compact('userarrall',$userarrall));
     }
 }

@@ -39,7 +39,7 @@
             <div class="row home-content__main">
 
                 <h1>
-                IT Play Ground
+                Click IT PlayGround
                 </h1>
 
                 <h3>

@@ -33,15 +33,17 @@ if(!empty($projectinfobyid['id'])){
             <a id="" href="#" data-toggle="modal" data-target="#signupmodal">Sign Up</a>
             <!-- <a href="#">Sign Up</a> -->
             @endif
-            @if( Auth::check() )
-            @php $uid=Session::get('id'); @endphp
+            @php
+            if( Auth::check() ){
+             $uid=Session::get('id'); @endphp
+            
             <a href="{{ url('profile/'.$uid.'/edit') }}">Profile</a>
             <!-- <a href="#">Log Out</a> -->
 
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Logout </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-            @endif
+            @php } @endphp
           </div>
         </div>
 
@@ -519,6 +521,53 @@ if(!empty($projectinfobyid['id'])){
         </div>
       </div>
 
+
+      <div class="contactus">
+        <div class="card-header" style="background-color: #4CAF50 !important;">
+            <div class="incont">
+                <a data-id="0" class="contactus-min"><img src="{{ URL::asset('images/min.png') }}" alt="Homepage"></a>
+                <a data-id="0" class="contactus-close"><img src="{{ URL::asset('images/closecontact.jpg') }}" alt="Homepage"></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('contactus') }}" aria-label="{{ __('Contact Us') }}">
+                            @csrf
+                            <input id="usid" type="hidden" class="" name="usid" value="{{ $uid }}">
+                            
+                            <div class="form-group row">
+
+                                <div class="col-md-12">
+                                    <input placeholder="Enter title" id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required>
+
+                                    @if ($errors->has('title'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('title') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>            
+                            <div class="form-group row">
+
+                                <div class="col-md-12">
+                                    <textarea placeholder="Enter message" id="message" class="form-control{{ $errors->has('message') ? ' is-invalid' : '' }}" name="message" rows="2" value="" required></textarea>
+                                    @if ($errors->has('message'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('message') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>            
+                            <div class="form-group row mb-0">
+                                <div class="col-md-12 offset-md-4">
+                                    <button id="contactussubmit" type="submit" class="btn btn-primary">
+                                        {{ __('Contact') }}
+                                    </button>
+                                </div>
+                            </div>
+            </form>
+        </div>
+      </div>
+
     <!-- script
     ================================================== -->    
         
@@ -582,6 +631,54 @@ if(!empty($projectinfobyid['id'])){
                 return false;
             }
         }); 
+
+        //contactusform
+        $(".contactus-min").click(function(){
+            if($(this).attr('data-id') == '1'){
+                $('.contactus-min img').attr("src","{{ URL::asset('images/min.png') }}" );
+                $('.contactus').css('top','49%');
+                $(this).attr('data-id','0');
+            }else{
+                $('.contactus-min img').attr("src","{{ URL::asset('images/max.png') }}" );
+                $('.contactus').css('top','95%');
+                $(this).attr('data-id','1');
+            }
+            return false;
+        });
+
+
+        $(".contactus-close").click(function(){
+                $('.contactus').remove();
+            return false;
+        });
+
+        $('#contactussubmit1').click(function(e){
+            //alert($('#passwordchange').val());
+            if($('#usrid').val() != ''){
+               e.preventDefault();
+               /*$.ajaxSetup({
+                  headers: { 'csrftoken' : '{{ csrf_token() }}' }
+              });*/
+               /*alert($('#uid').val());
+               alert($('#passwordchange').val());*/
+               var token = "{{ csrf_token() }}";
+                $.ajax({
+                  url: "{{ route('formSubmit') }}",
+                  method: 'POST',
+                  dataType: 'json',
+                  data: {'_token':token,'password':$('#passwordchange').val(),'uid':$('#uid').val()},
+                  success: function(result){
+                    //alert('success');
+                     alert(result.success);
+                     $(".chngepasssec").slideToggle();
+                     /*$('.alert').show();
+                     $('.alert').html(result.success);*/
+                  }});
+            }else{
+                alert('Please login for this.');
+                return false;
+            }
+        });
 
         
     });

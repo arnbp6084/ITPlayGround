@@ -49,10 +49,10 @@ class CoursesController extends Controller
         $project = \App\Project::find($id);
         $projectinfobyid = $project->ToArray();
 
-        $project = \App\Project::all();
+        $project = \App\Project::all()->where('status','=',1);
         $projectinfo = $project->toArray();
 
-        $contentall = \App\Content::all();
+        $contentall = \App\Content::all()->where('status','=',1);
         $contentallinfo = $contentall->toArray();
 
         return view('pages.course',['projectinfobyid' => $projectinfobyid, 'projectinfo' => $projectinfo, 'contentallinfo' => $contentallinfo]);

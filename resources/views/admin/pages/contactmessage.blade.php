@@ -35,7 +35,7 @@
                         <tr>
                             <th>User Id</th>
                             <th>Name</th>
-                            <th>Enrolled Subject</th>
+                            <th>Messages</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,29 +43,29 @@
                         @php
                         if(!empty($userarrall)){ 
                         @endphp
-                            @foreach ($userarrall as $userenroll)
+                            @foreach ($userarrall as $usermsg)
                               @php
-                                $enrollid=$userenroll['id'];
-                                $enrollname=$userenroll['name'];
-                                $enrollemail=$userenroll['email'];
-                                $enrollphone=$userenroll['phone'];
-                                $enrolladdress=$userenroll['address'];
+                                $contactid=$usermsg['id'];
+                                $contactname=$usermsg['name'];
+                                $contactemail=$usermsg['email'];
+                                $contactphone=$usermsg['phone'];
+                                $contactaddress=$usermsg['address'];
                               @endphp
                             <tr>
-                                <td>{{ $enrollid }}</td>
-                                <td>{{ $enrollname }} <br><a style="cursor: pointer;font-size: 15px;color:green;" class="viewdets">View details</a>
+                                <td>{{ $contactid }}</td>
+                                <td>{{ $contactname }} <br><a style="cursor: pointer;font-size: 15px;color:green;" class="viewdets">View details</a>
                                     <div class="detcont" style="display: none; margin: 4% 10% 4% 10%;">
                                         <ul>
-                                            <li><b>Name:</b> {{ $enrollname }}</li>
-                                            <li><b>Email:</b> {{ $enrollemail }}</li>
-                                            <li><b>Phone:</b> {{ $enrollphone }}</li>
-                                            <li><b>Address:</b> {{ $enrolladdress }}</li>
+                                            <li><b>Name:</b> {{ $contactname }}</li>
+                                            <li><b>Email:</b> {{ $contactemail }}</li>
+                                            <li><b>Phone:</b> {{ $contactphone }}</li>
+                                            <li><b>Address:</b> {{ $contactaddress }}</li>
                                         </ul>
                                     </div>
                                 </td>
                                 <td>
-                                    @foreach ($userenroll['projs'] as $userenrollprj)
-                                        <span><u>{{ $userenrollprj }}</u></span>
+                                    @foreach ($usermsg['msgs'] as $usercontactmsg)
+                                        <span>{{ $usercontactmsg }}<br></span>
                                     @endforeach
                                 </td>
                             </tr>
@@ -103,9 +103,9 @@
                         }
                     });
 
-                    $('.menu-item-has-children:eq( 2 )').addClass('show');
-                    $('.sub-menu:eq( 2 )').addClass('show');
-                    $('.sub-menu:eq( 2 ) a').addClass('activa');
+                    $('.menu-item-has-children:eq( 4 )').addClass('show');
+                    $('.sub-menu:eq( 4 )').addClass('show');
+                    $('.sub-menu:eq( 4 ) a').addClass('activa');
                     
                     
                     $('#responsive1').DataTable();

@@ -16,9 +16,9 @@
     ================================================== -->
     
         @php
-        if((!empty($contentinfobyid[0]['id'])) && ($contentinfobyid[0]['id'] != 3)){ @endphp
+        if((!empty($contentinfobyid['id'])) && ($contentinfobyid['id'] != 3)){ @endphp
             <section id="about" class="s-about target-section aboutwatermark">
-               @php echo html_entity_decode($contentinfobyid[0]['description']); @endphp
+               @php echo html_entity_decode($contentinfobyid['description']); @endphp
             </section>
         @php } @endphp        
     
