@@ -167,7 +167,7 @@
 
 
 
-                <div class="carou">
+                <div class="carou" style="margin-top: 15%;">
                     <div class="">
                         <div class="row">
                             <!-- Carousel -->
@@ -221,14 +221,14 @@
                                                  <br><br><br><br>
                                                 @endif
                                                 </div>
-                                                <div class="joinnow hidden-xs" id="">
+                                                <div class="joinnow" id="">
                                                     <a style="background-color: #4CAF50;box-shadow: 0px 0px 60px 10px grey;" class="btn btn-theme btn-sm btn-min-block" href="{{ URL::to('business/' . $sliderpid) }}">Join Business</a>
                                                 </div>
                                             </div>
                                         </div><!-- /header-text -->
-                                        <div class="join_now" id="">
+                                        {{-- <div class="join_now" id="">
                                                     <a style="background-color: #4CAF50;box-shadow: 0px 0px 60px 10px grey;" class="btn btn-theme btn-sm btn-min-block" href="{{ URL::to('business/' . $sliderpid) }}">Join Business</a>
-                                        </div>
+                                        </div> --}}
                                     </div>                                    
                                     @php } @endphp
                                     
