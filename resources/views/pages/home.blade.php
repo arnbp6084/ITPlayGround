@@ -1,6 +1,133 @@
 @extends('layouts.default')
 
 @section('content')
+<style type="text/css">
+
+.carou .container {
+    margin-top: 20px;
+}
+
+/* Carousel Styles */
+.carou .carousel-indicators .active {
+    background-color: #2980b9;
+}
+
+.carou .carousel-inner img {
+    width: 100%;
+    max-height: 460px
+}
+
+.carou .carousel-control {
+    width: 0;
+}
+
+.carou .carousel-control.left,
+.carou .carousel-control.right {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-image: none;
+    background-repeat: no-repeat;
+    text-shadow: none;
+}
+
+.carou .carousel-control.left span {
+    padding: 15px;
+}
+
+.carou .carousel-control.right span {
+    padding: 15px;
+}
+
+.carou .carousel-control .glyphicon-chevron-left, 
+.carou .carousel-control .glyphicon-chevron-right, 
+.carou .carousel-control .icon-prev, 
+.carou .carousel-control .icon-next {
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+    display: inline-block;
+}
+
+.carou .carousel-control .glyphicon-chevron-left,
+.carou .carousel-control .icon-prev {
+    left: 0;
+}
+
+.carou .carousel-control .glyphicon-chevron-right,
+.carou .carousel-control .icon-next {
+    right: 0;
+}
+
+.carou .carousel-control.left span,
+.carou .carousel-control.right span {
+    background-color: #000;
+}
+
+.carou .carousel-control.left span:hover,
+.carou .carousel-control.right span:hover {
+    opacity: .7;
+    filter: alpha(opacity=70);
+}
+
+/* Carousel Header Styles */
+.carou .header-text {
+    position: absolute;
+    top: 20%;
+    left: 1.8%;
+    right: auto;
+    width: 96.66666666666666%;
+    color: #fff;
+}
+
+.carou .header-text h2 {
+    font-size: 40px;
+}
+
+.carou .header-text h2 span {
+    background-color: #2980b9;
+    padding: 10px;
+}
+
+.carou .header-text h3 span {
+    background-color: #000;
+    padding: 15px;
+}
+
+.carou .btn-min-block {
+    min-width: 170px;
+    line-height: 26px;
+}
+
+.carou .btn-theme {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin-right: 15px;
+}
+
+.carou .btn-theme:hover {
+    color: #000;
+    background-color: #fff;
+    border-color: #fff;
+}   
+
+@media only screen and (max-width:400px) {
+  
+  .home-content__main {
+    padding: 0 0px !important;
+  }
+  .row { padding-right: 2rem; padding-left: 2rem; }   
+}
+@media only screen and (max-width:600px) {
+
+  .home-content__main {
+    padding: 0 0px !important;
+  }
+  .row { padding-right: 2rem; padding-left: 2rem; }
+}
+.carou span { opacity: 0.7; border-radius: 10px 10px 10px 10px; }
+.join_now { display: none; }
+</style>
   <!-- home
     ================================================== -->
     <section id="home" class="s-home page-hero target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
@@ -37,6 +164,87 @@
             </script>
             
             <div class="row home-content__main">
+
+
+
+                <div class="carou">
+                    <div class="">
+                        <div class="row">
+                            <!-- Carousel -->
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    @php
+                                    foreach($sliderinfo as $slider){
+                                      if($slider['id']=='1'){ @endphp
+                                    <li data-target="#carousel-example-generic" data-slide-to="{{ $slider['id'] }}" class="active"></li>
+                                      @php
+                                      }else{ @endphp
+                                    <li data-target="#carousel-example-generic" data-slide-to="{{ $slider['id'] }}"></li>
+                                      @php } } @endphp                                    
+                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    @php
+                                    foreach($sliderinfo as $slider){
+                                      
+                                        $sliderimg=$slider['image'];
+                                        $slidertext1=$slider['text1'];
+                                        $slidertext2=$slider['text2'];
+                                        $sliderpid=$slider['pid'];
+                                        $sliderstatus=$slider['status'];
+                                       @endphp
+                                    @php if($slider['id']=='1'){ @endphp
+                                    <div class="item active">
+                                    @php }else{ @endphp
+                                    <div class="item">
+                                    @php } @endphp
+                                        <img src="{{ URL::asset('upload/'.$sliderimg) }}" alt="First slide">
+                                        <!-- Static Header -->
+                                        <div class="header-text">
+                                            <div class="col-md-12 text-center">
+                                                <div class=" hidden-xs">
+                                                @if($slidertext1)
+                                                <h2>
+                                                    <span>{{ $slidertext1 }}</span>
+                                                </h2>
+                                                <br>
+                                                @else
+                                                 <br><br><br><br>
+                                                @endif
+                                                @if($slidertext2)
+                                                <h3>
+                                                    <span>{{ $slidertext2 }}</span>
+                                                </h3>
+                                                <br>
+                                                @else
+                                                 <br><br><br><br>
+                                                @endif
+                                                </div>
+                                                <div class="joinnow hidden-xs" id="">
+                                                    <a style="background-color: #4CAF50;box-shadow: 0px 0px 60px 10px grey;" class="btn btn-theme btn-sm btn-min-block" href="{{ URL::to('business/' . $sliderpid) }}">Join Business</a>
+                                                </div>
+                                            </div>
+                                        </div><!-- /header-text -->
+                                        <div class="join_now" id="">
+                                                    <a style="background-color: #4CAF50;box-shadow: 0px 0px 60px 10px grey;" class="btn btn-theme btn-sm btn-min-block" href="{{ URL::to('business/' . $sliderpid) }}">Join Business</a>
+                                        </div>
+                                    </div>                                    
+                                    @php } @endphp
+                                    
+                                </div>
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div><!-- /carousel -->
+                        </div>
+                    </div>
+                </div>
+
 
                 <h1>
                 Click IT PlayGround

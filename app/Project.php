@@ -15,4 +15,9 @@ class Project extends Model
     {
         return $this->belongsToMany('App\User','user_project','pid','uid');
     }
+
+    public function businessusers()
+    {
+        return $this->belongsToMany('App\User','business','pid','uid');
+    }
 }

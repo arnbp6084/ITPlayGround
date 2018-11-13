@@ -16,7 +16,7 @@
         <div class="row contact-main" data-aos="fade-up">
             <div class="col-full">
                 <p class="contact-email">
-                    <a href="mailto:arnabpolley84@gmail.com">arnabpolley84@gmail.com</a>
+                    <a href="mailto:arnab.p@clickitplayground.co.in">arnab.p@clickitplayground.co.in</a>
                 </p>
                 <p class="contact-address">
                 Science city kolkata - 39

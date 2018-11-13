@@ -16,7 +16,7 @@ class ContentsTableSeeder extends Seeder
 	    });*/
 	    DB::table('contents')->insert([
             'title' => str_random(10),
-            'desc' => str_random(10),
+            'description' => str_random(10),
             'images' => bcrypt('secret'),
         ]);
     }

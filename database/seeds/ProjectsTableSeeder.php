@@ -16,7 +16,7 @@ class ProjectsTableSeeder extends Seeder
 	    });*/
 	    DB::table('projects')->insert([
             'name' => str_random(10),
-            'desc' => str_random(10),
+            'description' => str_random(10),
             'images' => bcrypt('secret'),
         ]);
     }

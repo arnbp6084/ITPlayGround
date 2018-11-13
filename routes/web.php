@@ -19,6 +19,9 @@ Route::get('/home', 'HomeController@gethome')->name('home');
 Route::resource('content', 'ContentController');
 Route::resource('courses', 'CoursesController');
 Route::resource('profile', 'ProfileController');
+
+Route::resource('business', 'BusinessController');
+
 Route::post('/myprofile/passwordchange', 'ProfileController@passwordchange')->name('formSubmit');
 Route::post('/enroll', 'CoursesController@enrollyou')->name('enrollYou');
 Route::post('/contactus', 'HomeController@contactus')->name('contactus');
@@ -44,6 +47,11 @@ Route::resource('adminprofile', 'admin\ProfileController');
 Route::post('/adminprofile/passwordchange', 'admin\ProfileController@passwordchange')->name('adminProfileSubmit');
 
 Route::get('/admincontact', 'admin\AdminController@contactus');
+
+Route::get('/adminbusiness', 'admin\BusinessController@business');
+
+Route::resource('adminslider', 'admin\SliderController');
+Route::post('/adminslidersts', 'admin\SliderController@statuschange');
 
 
 

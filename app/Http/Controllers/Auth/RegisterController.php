@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Session;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -67,22 +68,61 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
+        /*echo "innn";
+        exit();*/
         //dd($data);
         /*print 'jjjj';
         print_r($data);
         exit();*/
-        User::create([
+        $this->validator($request->all());
+        $data=$request->all();
+        /*Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'address' => 'required|string|min:6',
+            'phone' => 'required|numeric|size:10',
+        ]);*/
+        
+
+        $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
             'phone' => $data['phone'],
+            'image' => 'noimage',
         ]);
+        $request->session()->flash('status', 'User registration was successful!');
+        return redirect('/');
 
-        Session::flash('status', 'User registration was successful!'); 
+        //Session::put('status', 'User registration was successful!'); 
+        //event(new Registered($user));
+        //$this->guard()->login($user);
+        //echo "innn and done";
+        //exit();
+        //redirect('/');
+        //return $this->registered($request, $user)
+          //              ?: redirect($this->redirectPath());        
         
+        /*$user=User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'phone' => $data['phone'],
+            'image' => 'noimage',
+        ]);
+        Session::put('status', 'User registration was successful!'); */
+        
+        
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
     }
 
     

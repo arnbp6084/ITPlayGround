@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Project','user_project','uid','pid');
     }
 
+    public function businessprojects()
+    {
+        return $this->belongsToMany('App\Project','business','uid','pid');
+    }
+
     public function contacts()
     {
         //return $this->belongsToMany('App\Project','user_project','uid','pid');

@@ -58,17 +58,21 @@ class HomeController extends Controller
 
         $contentall = \App\Content::all()->where('status','=',1);
         $contentallinfo = $contentall->toArray();
+        
+        $slider = \App\Slider::all()->where('status','=',1);
+        $sliderinfo = $slider->toArray();
         /*print 'kkk<pre>';
             print_r($projectinfo);
         print '</pre>';*/
+
         if (Auth::check()) {
             
             $userInfo = Auth::user()->toArray();
             
-            return view('pages.home', ['userInfo' => $userInfo,'projectinfo' => $projectinfo, 'contentallinfo' => $contentallinfo]);
+            return view('pages.home', ['userInfo' => $userInfo,'projectinfo' => $projectinfo, 'contentallinfo' => $contentallinfo, 'sliderinfo' => $sliderinfo]);
         }else{
             
-            return view('pages.home', ['projectinfo' => $projectinfo, 'contentallinfo' => $contentallinfo]);    
+            return view('pages.home', ['projectinfo' => $projectinfo, 'contentallinfo' => $contentallinfo, 'sliderinfo' => $sliderinfo]);    
         }
         
     }

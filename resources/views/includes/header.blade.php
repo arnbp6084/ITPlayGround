@@ -680,6 +680,15 @@ if(!empty($projectinfobyid['id'])){
             }
         });
 
+        $(document).on("click",".joinnow,.join_now",function(){
+            /*alert('clicked');
+            return false;*/
+            if($("#usrid").val() == ''){
+                alert('Please login to set bussiness.');
+                return false;
+            }
+        });
+        
         
     });
 
